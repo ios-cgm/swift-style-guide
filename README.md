@@ -406,17 +406,10 @@ let lastName = name.lastName
 
 ```swift
 myFunctionWithEscapingClosure() { [weak self] (error) -> Void in
-    // you can do this
-
-    self?.doSomething()
-
-    // or you can do this
-
-    guard let strongSelf = self else {
+    guard let `self` = self else {
         return
     }
-
-    strongSelf.doSomething()
+    self.doSomething()
 }
 ```
 
@@ -446,14 +439,14 @@ imageView.setImageWithURL(url, type: .person)
 imageView.setImageWithURL(url, type: AsyncImageView.Type.person)
 ```
 
-* **3.1.10** Don’t use shorthand for class methods since it is generally more difficult to infer the context from class methods as opposed to `enum`s.
+* **3.1.10** Use shorthand for class methods.
 
 ```swift
 // PREFERRED
-imageView.backgroundColor = UIColor.white
+imageView.backgroundColor = .white
 
 // NOT PREFERRED
-imageView.backgroundColor = .white
+imageView.backgroundColor = UIColor.white
 ```
 
 * **3.1.11** Prefer not writing `self.` unless it is required.
@@ -666,12 +659,12 @@ var computedProperty: String  {
 }
 ```
 
-* **3.7.4** You can declare a singleton property as follows:
+* **3.7.4** You can declare a singleton property as follows (`private init()` should be present in order to ensure that no further instances are created):
 
 ```swift
 class PirateManager {
     static let shared = PirateManager()
-
+    private init() {} 
     /* ... */
 }
 ```
@@ -1031,17 +1024,15 @@ func myFunction() {
 
 * **4.2.1** Always leave a space after `//`.
 * **4.2.2** Always leave comments on their own line.
-* **4.2.3** When using `// MARK: - whatever`, leave a newline after the comment.
+
 
 ```swift
 class Pirate {
 
     // MARK: - instance properties
-
     private let pirateName: String
 
     // MARK: - initialization
-
     init() {
         /* ... */
     }
