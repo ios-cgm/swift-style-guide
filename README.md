@@ -198,18 +198,40 @@ if x == firstReallyReallyLongPredicateFunction()
 
 * **2.3** Use `camelCase` (initial lowercase letter) for function, method, property, constant, variable, argument names, enum cases, etc.).
 
-* **2.4** When dealing with an acronym or other name that is usually written in all caps, actually use all caps in any names that use this in code. The exception is if this word is at the start of a name that needs to start with lowercase - in this case, use all lowercase for the acronym.
+* **2.4** Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase, in which case it should be uniformly lower-cased
 <details>
 
 ```swift
-// "HTML" is at the start of a constant name, so we use lowercase "html"
-let htmlBodyContent: String = "<p>Hello, World!</p>"
-// Prefer using ID to Id
-let profileID: Int = 1
-// Prefer URLFinder to UrlFinder
-class URLFinder {
-    /* ... */
-}
+  // WRONG
+  class UrlValidator {
+
+    func isValidUrl(_ URL: URL) -> Bool {
+      // ...
+    }
+
+    func isProfileUrl(_ URL: URL, for userId: String) -> Bool {
+      // ...
+    }
+  }
+
+  let URLValidator = UrlValidator()
+  let isProfile = URLValidator.isProfileUrl(URLToTest, userId: IDOfUser)
+
+  // RIGHT
+  class URLValidator {
+
+    func isValidURL(_ url: URL) -> Bool {
+      // ...
+    }
+
+    func isProfileURL(_ url: URL, for userID: String) -> Bool {
+      // ...
+    }
+  }
+
+  let urlValidator = URLValidator()
+  let isProfile = urlValidator.isProfileUrl(urlToTest, userID: idOfUser)
+
 ```
 
 </details>
@@ -399,6 +421,60 @@ protocol InputTextViewProtocol {
 
 </details>
 
+* **2.12** Name booleans like isSpaceship, hasSpacesuit, etc. This makes it clear that they are booleans and not other types.
+
+* **2.13** Names should be written with their most general part first and their most specific part last. The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for." Most importantly, be consistent with how you order the parts of your name.
+
+  <details>
+
+  ```swift
+  // WRONG
+  let rightTitleMargin: CGFloat
+  let leftTitleMargin: CGFloat
+  let bodyRightMargin: CGFloat
+  let bodyLeftMargin: CGFloat
+
+  // RIGHT
+  let titleMarginRight: CGFloat
+  let titleMarginLeft: CGFloat
+  let bodyMarginRight: CGFloat
+  let bodyMarginLeft: CGFloat
+  ```
+
+  </details>
+
+* **2.14** Event-handling functions should be named like past-tense sentences. The subject can be omitted if it's not needed for clarity
+
+  <details>
+
+  ```swift
+  // WRONG
+  class ExperiencesViewController {
+
+    private func handleBookButtonTap() {
+      // ...
+    }
+
+    private func modelChanged() {
+      // ...
+    }
+  }
+
+  // RIGHT
+  class ExperiencesViewController {
+
+    private func didTapBookButton() {
+      // ...
+    }
+
+    private func modelDidChange() {
+      // ...
+    }
+  }
+  ```
+
+  </details>
+
 ## 3. Coding Style
 
 ### 3.1 General
@@ -467,9 +543,7 @@ myFunctionWithEscapingClosure() { [weak self] (error) -> Void in
 
 </details>
 
-* **3.1.7** Don't use labeled breaks.
-
-* **3.1.8** Don't place parentheses around control flow predicates.
+* **3.1.7** Don't place parentheses around control flow predicates.
 <details>
 
 ```swift
@@ -486,7 +560,7 @@ if (x == y) {
 
 </details>
 
-* **3.1.9** Avoid writing out an `enum` type where possible - use shorthand.
+* **3.1.8** Avoid writing out an `enum` type where possible - use shorthand.
 <details>
 
 ```swift
@@ -499,7 +573,7 @@ imageView.setImageWithURL(url, type: AsyncImageView.Type.person)
 
 </details>
 
-* **3.1.10** Use shorthand for class methods.
+* **3.1.9** Use shorthand for class methods.
 <details>
 
 ```swift
@@ -512,11 +586,47 @@ imageView.backgroundColor = UIColor.white
 
 </details>
 
-* **3.1.11** Prefer not writing `self.` unless it is required.
+* **3.1.10** Prefer not writing `self.` unless it is required.
 
-* **3.1.12** When writing methods, keep in mind whether the method is intended to be overridden or not. If not, mark it as `final`, though keep in mind that this will prevent the method from being overwritten for testing purposes. In general, `final` methods result in improved compilation times, so it is good to use this when applicable. Be particularly careful, however, when applying the `final` keyword in a library since it is non-trivial to change something to be non-`final` in a library as opposed to have changing something to be non-`final` in your local project.
+  <details>
 
-* **3.1.13** When using a statement such as `else`, `catch`, etc. that follows a block, put this keyword on the same line as the block. Again, we are following the [1TBS style](https://en.m.wikipedia.org/wiki/Indent_style#Variant:_1TBS) here. Example `if`/`else` and `do`/`catch` code is below.
+  ```swift
+  final class Listing {
+
+    init(capacity: Int, allowsPets: Bool) {
+      // WRONG
+      self.capacity = capacity
+      self.isFamilyFriendly = !allowsPets // `self.` not required here
+
+      // RIGHT
+      self.capacity = capacity
+      isFamilyFriendly = !allowsPets
+    }
+
+    private let isFamilyFriendly: Bool
+    private var capacity: Int
+
+    private func increaseCapacity(by amount: Int) {
+      // WRONG
+      self.capacity += amount
+
+      // RIGHT
+      capacity += amount
+
+      // WRONG
+      self.save()
+
+      // RIGHT
+      save()
+    }
+  }
+  ```
+
+  </details>
+
+* **3.1.11** When writing methods, keep in mind whether the method is intended to be overridden or not. If not, mark it as `final`, though keep in mind that this will prevent the method from being overwritten for testing purposes. In general, `final` methods result in improved compilation times, so it is good to use this when applicable. Be particularly careful, however, when applying the `final` keyword in a library since it is non-trivial to change something to be non-`final` in a library as opposed to have changing something to be non-`final` in your local project.
+
+* **3.1.12** When using a statement such as `else`, `catch`, etc. that follows a block, put this keyword on the same line as the block. Again, we are following the [1TBS style](https://en.m.wikipedia.org/wiki/Indent_style#Variant:_1TBS) here. Example `if`/`else` and `do`/`catch` code is below.
 <details>
 
 ```swift
