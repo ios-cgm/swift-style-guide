@@ -34,6 +34,7 @@ This guide was last updated for Swift 3.0 on August 8th, 2017.
 * **1.3** Ensure that there is a newline at the end of every file.
 * **1.4** Ensure that there is no trailing whitespace anywhere (Xcode->Preferences->Text Editing->Automatically trim trailing whitespace + Including whitespace-only lines).
 * **1.5** Do not place opening braces on new lines - we use the [1TBS style](https://en.m.wikipedia.org/wiki/Indent_style#Variant:_1TBS).
+<details>
 
 ```swift
 class SomeClass {
@@ -51,7 +52,10 @@ class SomeClass {
 }
 ```
 
+</details>
+
 * **1.6** When writing a type for a property, constant, variable, a key for a dictionary, a function argument, a protocol conformance, or a superclass, don't add a space before the colon.
+<details>
 
 ```swift
 // specifying type
@@ -82,13 +86,19 @@ extension PirateViewController: UITableViewDataSource {
 }
 ```
 
+</details>
+
 * **1.7** In general, there should be a space following a comma.
+<details>
 
 ```swift
 let myArray = [1, 2, 3, 4, 5]
 ```
 
+</details>
+
 * **1.8** There should be a space before and after a binary operator such as `+`, `==`, or `->`. There should also not be a space after a `(` and before a `)`.
+<details>
 
 ```swift
 let myValue = 20 + (30 / 2) * 3
@@ -100,7 +110,10 @@ func pancake(with syrup: Syrup) -> Pancake {
 }
 ```
 
+</details>
+
 * **1.9** We follow Xcode's recommended indentation style (i.e. your code should not change if CTRL-I is pressed). When declaring a function that spans multiple lines, prefer using that syntax to which Xcode, as of version 7.3, defaults.
+<details>
 
 ```swift
 // Xcode indentation for a function declaration that spans multiple lines
@@ -120,7 +133,10 @@ if myFirstValue > (mySecondValue + myThirdValue)
 }
 ```
 
+</details>
+
 * **1.10** When calling a function that has many parameters, put each argument on a separate line with a single extra indentation.
+<details>
 
 ```swift
 someFunctionWithManyArguments(
@@ -129,7 +145,10 @@ someFunctionWithManyArguments(
     thirdArgument: someOtherLocalProperty)
 ```
 
+</details>
+
 * **1.11** When dealing with an implicit array or dictionary large enough to warrant splitting it into multiple lines, treat the `[` and `]` as if they were braces in a method, `if` statement, etc. Closures in a method should be treated similarly.
+<details>
 
 ```swift
 someFunctionWithABunchOfArguments(
@@ -147,7 +166,10 @@ someFunctionWithABunchOfArguments(
     })
 ```
 
+</details>
+
 * **1.12** Prefer using local constants or other mitigation techniques to avoid multi-line predicates where possible.
+<details>
 
 ```swift
 // PREFERRED
@@ -166,6 +188,8 @@ if x == firstReallyReallyLongPredicateFunction()
 }
 ```
 
+</details>
+
 ## 2. Naming
 
 * **2.1** There is no need for Objective-C style prefixing in Swift (e.g. use just `GuybrushThreepwood` instead of `LIGuybrushThreepwood`).
@@ -175,6 +199,7 @@ if x == firstReallyReallyLongPredicateFunction()
 * **2.3** Use `camelCase` (initial lowercase letter) for function, method, property, constant, variable, argument names, enum cases, etc.).
 
 * **2.4** When dealing with an acronym or other name that is usually written in all caps, actually use all caps in any names that use this in code. The exception is if this word is at the start of a name that needs to start with lowercase - in this case, use all lowercase for the acronym.
+<details>
 
 ```swift
 // "HTML" is at the start of a constant name, so we use lowercase "html"
@@ -187,7 +212,10 @@ class URLFinder {
 }
 ```
 
+</details>
+
 * **2.5** All constants other than singletons that are instance-independent should be `static`. All such `static` constants should be placed in a container `enum` type as per rule **3.1.16**. The naming of this container should be singular (e.g. `Constant` and not `Constants`) and it should be named such that it is relatively obvious that it is a constant container. If this is not obvious, you can add a `Constant` suffix to the name. You should use these containers to group constants that have similar or the same prefixes, suffixes and/or use cases.
+<details>
 
 ```swift
 class MyClassName {
@@ -211,7 +239,10 @@ class MyClassName {
 }
 ```
 
+</details>
+
 * **2.6** For generics and associated types, use either a single capital letter or a `PascalCase` word that describes the generic. If this word clashes with a protocol that it conforms to or a superclass that it subclasses, you can append a `Type` suffix to the associated type or generic name.
+<details>
 
 ```swift
 class SomeClass<T> { /* ... */ }
@@ -224,7 +255,10 @@ protocol Sequence {
 }
 ```
 
+</details>
+
 * **2.7** Names should be descriptive and unambiguous.
+<details>
 
 ```swift
 // PREFERRED
@@ -234,7 +268,10 @@ class RoundAnimatingButton: UIButton { /* ... */ }
 class CustomButton: UIButton { /* ... */ }
 ```
 
+</details>
+
 * **2.8** Do not abbreviate, use shortened names, or single letter names.
+<details>
 
 ```swift
 // PREFERRED
@@ -257,7 +294,10 @@ class RoundAnimating: UIButton {
 }
 ```
 
+</details>
+
 * **2.9** Include type information in constant or variable names when it is not obvious otherwise.
+<details>
 
 ```swift
 // PREFERRED
@@ -326,9 +366,12 @@ class ConnectionTableViewCell: UITableViewCell {
 }
 ```
 
+</details>
+
 * **2.10** When naming function arguments, make sure that the function can be read easily to understand the purpose of each argument.
 
 * **2.11** As per [Apple's API Design Guidelines](https://swift.org/documentation/api-design-guidelines/), a `protocol` should be named as nouns if they describe what something is doing (e.g. `Collection`) and using the suffixes `able`, `ible`, or `ing` if it describes a capability (e.g. `Equatable`, `ProgressReporting`). If neither of those options makes sense for your use case, you can add a `Protocol` suffix to the protocol's name as well. Some example `protocol`s are below.
+<details>
 
 ```swift
 // here, the name is a noun that describes what the protocol does
@@ -354,6 +397,8 @@ protocol InputTextViewProtocol {
 }
 ```
 
+</details>
+
 ## 3. Coding Style
 
 ### 3.1 General
@@ -361,6 +406,7 @@ protocol InputTextViewProtocol {
 * **3.1.1** Prefer `let` to `var` whenever possible.
 
 * **3.1.2** Prefer the composition of `map`, `filter`, `reduce`, etc. over iterating when transforming from one collection to another. Make sure to avoid using closures that have side effects when using these methods.
+<details>
 
 ```swift
 // PREFERRED
@@ -386,9 +432,12 @@ for integer in [4, 8, 15, 16, 23, 42] {
 }
 ```
 
+</details>
+
 * **3.1.3** Prefer not declaring types for constants or variables if they can be inferred anyway.
 
 * **3.1.4** If a function returns multiple values, prefer returning a tuple to using `inout` arguments (it’s best to use labeled tuples for clarity on what you’re returning if it is not otherwise obvious). If you use a certain tuple more than once, consider using a `typealias`. If you’re returning 3 or more items in a tuple, consider using a `struct` or `class` instead.
+<details>
 
 ```swift
 func pirateName() -> (firstName: String, lastName: String) {
@@ -400,9 +449,12 @@ let firstName = name.firstName
 let lastName = name.lastName
 ```
 
+</details>
+
 * **3.1.5** Be wary of retain cycles when creating delegates/protocols for your classes; typically, these properties should be declared `weak`.
 
 * **3.1.6** Be careful when calling `self` directly from an escaping closure as this can cause a retain cycle - use a [capture list](https://developer.apple.com/library/ios/documentation/swift/conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-XID_163) when this might be the case:
+<details>
 
 ```swift
 myFunctionWithEscapingClosure() { [weak self] (error) -> Void in
@@ -413,9 +465,12 @@ myFunctionWithEscapingClosure() { [weak self] (error) -> Void in
 }
 ```
 
+</details>
+
 * **3.1.7** Don't use labeled breaks.
 
 * **3.1.8** Don't place parentheses around control flow predicates.
+<details>
 
 ```swift
 // PREFERRED
@@ -429,7 +484,10 @@ if (x == y) {
 }
 ```
 
+</details>
+
 * **3.1.9** Avoid writing out an `enum` type where possible - use shorthand.
+<details>
 
 ```swift
 // PREFERRED
@@ -439,7 +497,10 @@ imageView.setImageWithURL(url, type: .person)
 imageView.setImageWithURL(url, type: AsyncImageView.Type.person)
 ```
 
+</details>
+
 * **3.1.10** Use shorthand for class methods.
+<details>
 
 ```swift
 // PREFERRED
@@ -449,11 +510,14 @@ imageView.backgroundColor = .white
 imageView.backgroundColor = UIColor.white
 ```
 
+</details>
+
 * **3.1.11** Prefer not writing `self.` unless it is required.
 
 * **3.1.12** When writing methods, keep in mind whether the method is intended to be overridden or not. If not, mark it as `final`, though keep in mind that this will prevent the method from being overwritten for testing purposes. In general, `final` methods result in improved compilation times, so it is good to use this when applicable. Be particularly careful, however, when applying the `final` keyword in a library since it is non-trivial to change something to be non-`final` in a library as opposed to have changing something to be non-`final` in your local project.
 
 * **3.1.13** When using a statement such as `else`, `catch`, etc. that follows a block, put this keyword on the same line as the block. Again, we are following the [1TBS style](https://en.m.wikipedia.org/wiki/Indent_style#Variant:_1TBS) here. Example `if`/`else` and `do`/`catch` code is below.
+<details>
 
 ```swift
 if someBoolean {
@@ -469,6 +533,8 @@ do {
 }
 ```
 
+</details>
+
 * **3.1.14** Prefer `static` to `class` when declaring a function or property that is associated with a class as opposed to an instance of that class. Only use `class` if you specifically need the functionality of overriding that function or property in a subclass, though consider using a `protocol` to achieve this instead.
 
 * **3.1.15** If you have a function that takes no arguments, has no side effects, and returns some object or value, prefer using a computed property instead.
@@ -478,6 +544,7 @@ do {
 ### 3.2 Access Modifiers
 
 * **3.2.1** Write the access modifier keyword first if it is needed.
+<details>
 
 ```swift
 // PREFERRED
@@ -487,7 +554,10 @@ private static let myPrivateNumber: Int
 static private let myPrivateNumber: Int
 ```
 
+</details>
+
 * **3.2.2** The access modifier keyword should not be on a line by itself - keep it inline with what it is describing.
+<details>
 
 ```swift
 // PREFERRED
@@ -502,9 +572,12 @@ class Pirate {
 }
 ```
 
+</details>
+
 * **3.2.3** In general, do not write the `internal` access modifier keyword since it is the default.
 
 * **3.2.4** If a property needs to be accessed by unit tests, you will have to make it `internal` to use `@testable import ModuleName`. If a property *should* be private, but you declare it to be `internal` for the purposes of unit testing, make sure you add an appropriate bit of documentation commenting that explains this. You can make use of the `- warning:` markup syntax for clarity as shown below.
+<details>
 
 ```swift
 /**
@@ -513,6 +586,8 @@ class Pirate {
  */
 let pirateName = "LeChuck"
 ```
+
+</details>
 
 * **3.2.5** Prefer `private` to `fileprivate` where possible.
 
@@ -535,6 +610,7 @@ You can override existing operators to support new types (especially `==`). Howe
 * **3.4.3** The `case` statements should line up with the `switch` statement itself as per default Swift standards.
 
 * **3.4.4** When defining a case that has an associated value, make sure that this value is appropriately labeled as opposed to just types (e.g. `case Hunger(hungerLevel: Int)` instead of `case Hunger(Int)`).
+<details>
 
 ```swift
 enum Problem {
@@ -555,9 +631,12 @@ func handleProblem(problem: Problem) {
 }
 ```
 
+</details>
+
 * **3.4.5** Prefer lists of possibilities (e.g. `case 1, 2, 3:`) to using the `fallthrough` keyword where possible).
 
 * **3.4.6** If you have a default case that shouldn't be reached, preferably throw an error (or handle it some other similar way such as asserting).
+<details>
 
 ```swift
 func handleDigit(_ digit: Int) throws {
@@ -570,6 +649,8 @@ func handleDigit(_ digit: Int) throws {
 }
 ```
 
+</details>
+
 ### 3.5 Optionals
 
 * **3.5.1** The only time you should be using implicitly unwrapped optionals is with `@IBOutlet`s. In every other case, it is better to use a non-optional or regular optional property. Yes, there are cases in which you can probably "guarantee" that the property will never be `nil` when used, but it is better to be safe and consistent. Similarly, don't use force unwraps.
@@ -577,6 +658,7 @@ func handleDigit(_ digit: Int) throws {
 * **3.5.2** Don't use `as!` or `try!`.
 
 * **3.5.3** If you don't plan on actually using the value stored in an optional, but need to determine whether or not this value is `nil`, explicitly check this value against `nil` as opposed to using `if let` syntax.
+<details>
 
 ```swift
 // PREFERERED
@@ -590,7 +672,10 @@ if let _ = someOptional {
 }
 ```
 
+</details>
+
 * **3.5.4** Don't use `unowned`. You can think of `unowned` as somewhat of an equivalent of a `weak` property that is implicitly unwrapped (though `unowned` has slight performance improvements on account of completely ignoring reference counting). Since we don't ever want to have implicit unwraps, we similarly don't want `unowned` properties.
+<details>
 
 ```swift
 // PREFERRED
@@ -601,13 +686,18 @@ weak var parentViewController: UIViewController!
 unowned var parentViewController: UIViewController
 ```
 
+</details>
+
 * **3.5.5** When unwrapping optionals, use the same name for the unwrapped constant or variable where appropriate.
+<details>
 
 ```swift
 guard let myValue = myValue else {
     return
 }
 ```
+
+</details>
 
 ### 3.6 Protocols
 
@@ -623,6 +713,7 @@ Even when using method #2, add `// MARK:` statements anyway for easier readabili
 ### 3.7 Properties
 
 * **3.7.1** If making a read-only, computed property, provide the getter without the `get {}` around it.
+<details>
 
 ```swift
 var computedProperty: String {
@@ -633,8 +724,11 @@ var computedProperty: String {
 }
 ```
 
+</details>
+
 * **3.7.2** When using `get {}`, `set {}`, `willSet`, and `didSet`, indent these blocks.
 * **3.7.3** Though you can create a custom name for the new or old value for `willSet`/`didSet` and `set`, use the standard `newValue`/`oldValue` identifiers that are provided by default.
+<details>
 
 ```swift
 var storedProperty: String = "I'm selling these fine leather jackets." {
@@ -659,7 +753,10 @@ var computedProperty: String  {
 }
 ```
 
+</details>
+
 * **3.7.4** You can declare a singleton property as follows (`private init()` should be present in order to ensure that no further instances are created):
+<details>
 
 ```swift
 class PirateManager {
@@ -669,9 +766,12 @@ class PirateManager {
 }
 ```
 
+</details>
+
 ### 3.8 Closures
 
 * **3.8.1** If the types of the parameters are obvious, it is OK to omit the type name, but being explicit is also OK. Sometimes readability is enhanced by adding clarifying detail and sometimes by taking repetitive parts away - use your best judgment and be consistent.
+<details>
 
 ```swift
 // omitting the type
@@ -688,7 +788,10 @@ doSomethingWithClosure() { response: NSURLResponse in
 [1, 2, 3].flatMap { String($0) }
 ```
 
+</details>
+
 * **3.8.2** If specifying a closure as a type, you don’t need to wrap it in parentheses unless it is required (e.g. if the type is optional or the closure is within another closure). Always wrap the arguments in the closure in a set of parentheses - use `()` to indicate no arguments and use `Void` to indicate that nothing is returned.
+<details>
 
 ```swift
 let completionBlock: (Bool) -> Void = { (success) in
@@ -702,9 +805,12 @@ let completionBlock: () -> Void = {
 let completionBlock: (() -> Void)? = nil
 ```
 
+</details>
+
 * **3.8.3** Keep parameter names on same line as the opening brace for closures when possible without too much horizontal overflow (i.e. ensure lines are less than 160 characters).
 
 * **3.8.4** Use trailing closure syntax unless the meaning of the closure is not obvious without the parameter name (an example of this could be if a method has parameters for success and failure closures).
+<details>
 
 ```swift
 // trailing closure
@@ -720,6 +826,8 @@ doSomething(1.0, success: { (parameter1) in
 })
 ```
 
+</details>
+
 ### 3.9 Arrays
 
 * **3.9.1** In general, avoid accessing an array directly with subscripts. When possible, use accessors such as `.first` or `.last`, which are optional and won’t crash. Prefer using a `for item in items` syntax when possible as opposed to something like `for i in 0 ..< items.count`. If you need to access an array subscript directly, make sure to do proper bounds checking. You can use `for (index, value) in items.enumerated()` to get both the index and the value.
@@ -731,6 +839,7 @@ doSomething(1.0, success: { (parameter1) in
 Suppose a function `myFunction` is supposed to return a `String`, however, at some point it can run into an error. A common approach is to have this function return an optional `String?` where we return `nil` if something went wrong.
 
 Example:
+<details>
 
 ```swift
 func readFile(named filename: String) -> String? {
@@ -753,9 +862,12 @@ func printSomeFile() {
 }
 ```
 
+</details>
+
 Instead, we should be using Swift's `try`/`catch` behavior when it is appropriate to know the reason for the failure.
 
 You can use a `struct` such as the following:
+<details>
 
 ```swift
 struct Error: Swift.Error {
@@ -773,7 +885,10 @@ struct Error: Swift.Error {
 }
 ```
 
+</details>
+
 Example usage:
+<details>
 
 ```swift
 func readFile(named filename: String) throws -> String {
@@ -796,6 +911,8 @@ func printSomeFile() {
 }
 ```
 
+</details>
+
 There are some exceptions in which it does make sense to use an optional as opposed to error handling. When the result should *semantically* potentially be `nil` as opposed to something going wrong while retrieving the result, it makes sense to return an optional instead of using error handling.
 
 In general, if a method can "fail", and the reason for the failure is not immediately obvious if using an optional return type, it probably makes sense for the method to throw an error.
@@ -803,6 +920,7 @@ In general, if a method can "fail", and the reason for the failure is not immedi
 ### 3.11 Using `guard` Statements
 
 * **3.11.1** In general, we prefer to use an "early return" strategy where applicable as opposed to nesting code in `if` statements. Using `guard` statements for this use-case is often helpful and can improve the readability of the code.
+<details>
 
 ```swift
 // PREFERRED
@@ -825,7 +943,10 @@ func eatDoughnut(at index: Int) {
 }
 ```
 
+</details>
+
 * **3.11.2** When unwrapping optionals, prefer `guard` statements as opposed to `if` statements to decrease the amount of nested indentation in your code.
+<details>
 
 ```swift
 // PREFERRED
@@ -849,7 +970,10 @@ bookVacation(on: monkeyIsland!)
 bragAboutVacation(at: monkeyIsland!)
 ```
 
+</details>
+
 * **3.11.3** When deciding between using an `if` statement or a `guard` statement when unwrapping optionals is *not* involved, the most important thing to keep in mind is the readability of the code. There are many possible cases here, such as depending on two different booleans, a complicated logical statement involving multiple comparisons, etc., so in general, use your best judgement to write code that is readable and consistent. If you are unsure whether `guard` or `if` is more readable or they seem equally readable, prefer using `guard`.
+<details>
 
 ```swift
 // an `if` statement is readable here
@@ -868,7 +992,10 @@ guard !operationFailed else {
 }
 ```
 
+</details>
+
 * **3.11.4** If choosing between two different states, it makes more sense to use an `if` statement as opposed to a `guard` statement.
+<details>
 
 ```swift
 // PREFERRED
@@ -887,7 +1014,10 @@ guard isFriendly else {
 print("Hello, nice to meet you!")
 ```
 
+</details>
+
 * **3.11.5** You should also use `guard` only if a failure should result in exiting the current context. Below is an example in which it makes more sense to use two `if` statements instead of using two `guard`s - we have two unrelated conditions that should not block one another.
+<details>
 
 ```swift
 if let monkeyIsland = monkeyIsland {
@@ -899,7 +1029,10 @@ if let woodchuck = woodchuck, canChuckWood(woodchuck) {
 }
 ```
 
+</details>
+
 * **3.11.6** Often, we can run into a situation in which we need to unwrap multiple optionals using `guard` statements. In general, combine unwraps into a single `guard` statement if handling the failure of each unwrap is identical (e.g. just a `return`, `break`, `continue`, `throw`, or some other `@noescape`).
+<details>
 
 ```swift
 // combined because we just return
@@ -923,8 +1056,11 @@ guard let thingThree = thingThree else {
 }
 ```
 
+</details>
+
 * **3.11.7** Don’t use one-liners for `guard` statements.
 
+<details>
 
 ```swift
 // PREFERRED
@@ -935,6 +1071,8 @@ guard let thingOne = thingOne else {
 // NOT PREFERRED
 guard let thingOne = thingOne else { return }
 ```
+
+</details>
 
 ## 4. Documentation/Comments
 
@@ -955,6 +1093,7 @@ Guidelines:
 * **4.1.3** Do not prefix each additional line with a `*`.
 
 * **4.1.4** Use the new `- parameter` syntax as opposed to the old `:param:` syntax (make sure to use lower case `parameter` and not `Parameter`). Option-click on a method you wrote to make sure the quick help looks correct.
+<details>
 
 ```swift
 class Human {
@@ -971,9 +1110,12 @@ class Human {
 }
 ```
 
+</details>
+
 * **4.1.5** If you’re going to be documenting the parameters/returns/throws of a method, document all of them, even if some of the documentation ends up being somewhat repetitive (this is preferable to having the documentation look incomplete). Sometimes, if only a single parameter warrants documentation, it might be better to just mention it in the description instead.
 
 * **4.1.6** For complicated classes, describe the usage of the class with some potential examples as seems appropriate. Remember that markdown syntax is valid in Swift's comment docs. Newlines, lists, etc. are therefore appropriate.
+<details>
 
 ```swift
 /**
@@ -1006,7 +1148,10 @@ class MyAwesomeClass {
 }
 ```
 
+</details>
+
 * **4.1.7** When mentioning code, use code ticks - \`
+<details>
 
 ```swift
 /**
@@ -1018,6 +1163,8 @@ func myFunction() {
 }
 ```
 
+</details>
+
 * **4.1.8** When writing doc comments, prefer brevity where possible.
 
 ### 4.2 Other Commenting Guidelines
@@ -1025,6 +1172,7 @@ func myFunction() {
 * **4.2.1** Always leave a space after `//`.
 * **4.2.2** Always leave comments on their own line.
 
+<details>
 
 ```swift
 class Pirate {
@@ -1039,3 +1187,5 @@ class Pirate {
 
 }
 ```
+
+</details>
