@@ -1349,7 +1349,7 @@ class Pirate {
 
 * **5.2** Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
-* **5.3** Extract complex property observers into methods.** This reduces nestedness, separates side-effects from property declarations, and makes the usage of implicitly-passed parameters like `oldValue` explicit.
+* **5.3** Extract complex property observers into methods. This reduces nestedness, separates side-effects from property declarations, and makes the usage of implicitly-passed parameters like `oldValue` explicit.
 
   <details>
 
@@ -1385,7 +1385,7 @@ class Pirate {
 
   </details>
 
-* **5.4** Extract complex callback blocks into methods**. This limits the complexity introduced by weak-self in blocks and reduces nestedness. If you need to reference self in the method call, make use of `guard` to unwrap self for the duration of the callback.
+* **5.4** Extract complex callback blocks into methods. This limits the complexity introduced by weak-self in blocks and reduces nestedness. If you need to reference self in the method call, make use of `guard` to unwrap self for the duration of the callback.
 
   <details>
 
@@ -1422,7 +1422,7 @@ class Pirate {
 
   </details>
 
-* <a id='guards-at-top'></a>(<a href='#guards-at-top'>link</a>) **Prefer using `guard` at the beginning of a scope.**
+* **5.5** Prefer using `guard` at the beginning of a scope.**
 
   <details>
 
@@ -1431,7 +1431,7 @@ class Pirate {
 
   </details>
 
-* **5.5** Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
+* **5.6** Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
 
 * <a id='avoid-global-functions'></a>(<a href='#avoid-global-functions'>link</a>) **Avoid global functions whenever possible.** Prefer methods within type definitions.
 
