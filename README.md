@@ -26,6 +26,7 @@ This guide was last updated for Swift 3.0 on August 8th, 2017.
     - [4. Documentation/Comments](#4-documentationcomments)
         - [4.1 Documentation](#41-documentation)
         - [4.2 Other Commenting Guidelines](#42-other-commenting-guidelines)
+    - [5. Patterns](#5-patterns)
 
 ## 1. Code Formatting
 
