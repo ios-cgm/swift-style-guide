@@ -938,6 +938,20 @@ doSomething(1.0, success: { (parameter1) in
 
 </details>
 
+* **3.8.5** Single-line closures should have a space inside each brace.
+
+<details>
+
+```swift
+// WRONG
+let evenSquares = numbers.filter {$0 % 2 == 0}.map {  $0 * $0  }
+
+// RIGHT
+let evenSquares = numbers.filter { $0 % 2 == 0 }.map { $0 * $0 }
+```
+
+</details>
+
 ### 3.9 Arrays
 
 * **3.9.1** In general, avoid accessing an array directly with subscripts. When possible, use accessors such as `.first` or `.last`, which are optional and won’t crash. Prefer using a `for item in items` syntax when possible as opposed to something like `for i in 0 ..< items.count`. If you need to access an array subscript directly, make sure to do proper bounds checking. You can use `for (index, value) in items.enumerated()` to get both the index and the value.
