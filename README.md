@@ -1422,7 +1422,7 @@ class Pirate {
 
   </details>
 
-* **5.5** Prefer using `guard` at the beginning of a scope.**
+* **5.5** Prefer using `guard` at the beginning of a scope.
 
   <details>
 
@@ -1431,9 +1431,9 @@ class Pirate {
 
   </details>
 
-* **5.6** Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
+* **5.6** Access control should be at the strictest level possible. Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
 
-* <a id='avoid-global-functions'></a>(<a href='#avoid-global-functions'>link</a>) **Avoid global functions whenever possible.** Prefer methods within type definitions.
+* **5.7** Avoid global functions whenever possible.** Prefer methods within type definitions.
 
   <details>
 
