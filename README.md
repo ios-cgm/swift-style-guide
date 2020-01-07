@@ -1347,7 +1347,7 @@ class Pirate {
 
   </details>
 
-* **5.2** Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
+* **5.2** Avoid performing any meaningful or time-intensive work in `init()`. Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
 * **5.3** Extract complex property observers into methods. This reduces nestedness, separates side-effects from property declarations, and makes the usage of implicitly-passed parameters like `oldValue` explicit.
 
@@ -1433,7 +1433,7 @@ class Pirate {
 
 * **5.6** Access control should be at the strictest level possible. Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
 
-* **5.7** Avoid global functions whenever possible.** Prefer methods within type definitions.
+* **5.7** Avoid global functions whenever possible. Prefer methods within type definitions.
 
   <details>
 
@@ -1463,3 +1463,61 @@ class Pirate {
 
   </details>
 
+* **5.8** Prefer putting constants in the top level of a file if they are `private`. If they are `public` or `internal`, define them as static properties, for namespacing purposes.
+
+  <details>
+
+  ```swift
+  private let privateValue = "secret"
+
+  public class MyClass {
+
+    public static let publicValue = "something"
+
+    func doSomething() {
+      print(privateValue)
+      print(MyClass.publicValue)
+    }
+  }
+  ```
+
+  </details>
+
+* **5.9** Default type methods to `static`. If a method needs to be overridden, the author should opt into that functionality by using the `class` keyword instead.
+
+  ```swift
+  // WRONG
+  class Fruit {
+    class func eatFruits(_ fruits: [Fruit]) { ... }
+  }
+
+  // RIGHT
+  class Fruit {
+    static func eatFruits(_ fruits: [Fruit]) { ... }
+  }
+  ```
+
+  </details>
+
+* **5.10** Check for nil rather than using optional binding if you don't need to use the value.
+
+  <details>
+
+  #### Why?
+  Checking for nil makes it immediately clear what the intent of the statement is. Optional binding is less explicit.
+
+  ```swift
+  var thing: Thing?
+
+  // WRONG
+  if let _ = thing {
+    doThing()
+  }
+
+  // RIGHT
+  if thing != nil {
+    doThing()
+  }
+  ```
+
+  </details>
