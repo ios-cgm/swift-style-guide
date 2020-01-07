@@ -1316,3 +1316,150 @@ class Pirate {
 </details>
 
 ## 5. Patterns
+
+* **5.1** Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property.
+
+  <details>
+
+  ```swift
+  // WRONG
+  class MyClass: NSObject {
+
+    init() {
+      super.init()
+      someValue = 5
+    }
+
+    var someValue: Int!
+  }
+
+  // RIGHT
+  class MyClass: NSObject {
+
+    init() {
+      someValue = 0
+      super.init()
+    }
+
+    var someValue: Int
+  }
+  ```
+
+  </details>
+
+* **5.2** Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
+
+* **5.3** Extract complex property observers into methods.** This reduces nestedness, separates side-effects from property declarations, and makes the usage of implicitly-passed parameters like `oldValue` explicit.
+
+  <details>
+
+  ```swift
+  // WRONG
+  class TextField {
+    var text: String? {
+      didSet {
+        guard oldValue != text else {
+          return
+        }
+
+        // Do a bunch of text-related side-effects.
+      }
+    }
+  }
+
+  // RIGHT
+  class TextField {
+    var text: String? {
+      didSet { textDidUpdate(from: oldValue) }
+    }
+
+    private func textDidUpdate(from oldValue: String?) {
+      guard oldValue != text else {
+        return
+      }
+
+      // Do a bunch of text-related side-effects.
+    }
+  }
+  ```
+
+  </details>
+
+* **5.4** Extract complex callback blocks into methods**. This limits the complexity introduced by weak-self in blocks and reduces nestedness. If you need to reference self in the method call, make use of `guard` to unwrap self for the duration of the callback.
+
+  <details>
+
+  ```swift
+  //WRONG
+  class MyClass {
+
+    func request(completion: () -> Void) {
+      API.request() { [weak self] response in
+        if let self = self {
+          // Processing and side effects
+        }
+        completion()
+      }
+    }
+  }
+
+  // RIGHT
+  class MyClass {
+
+    func request(completion: () -> Void) {
+      API.request() { [weak self] response in
+        guard let self = self else { return }
+        self.doSomething(self.property)
+        completion()
+      }
+    }
+
+    func doSomething(nonOptionalParameter: SomeClass) {
+      // Processing and side effects
+    }
+  }
+  ```
+
+  </details>
+
+* <a id='guards-at-top'></a>(<a href='#guards-at-top'>link</a>) **Prefer using `guard` at the beginning of a scope.**
+
+  <details>
+
+  #### Why?
+  It's easier to reason about a block of code when all `guard` statements are grouped together at the top rather than intermixed with business logic.
+
+  </details>
+
+* **5.5** Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
+
+* <a id='avoid-global-functions'></a>(<a href='#avoid-global-functions'>link</a>) **Avoid global functions whenever possible.** Prefer methods within type definitions.
+
+  <details>
+
+  ```swift
+  // WRONG
+  func age(of person, bornAt timeInterval) -> Int {
+    // ...
+  }
+
+  func jump(person: Person) {
+    // ...
+  }
+
+  // RIGHT
+  class Person {
+    var bornAt: TimeInterval
+
+    var age: Int {
+      // ...
+    }
+
+    func jump() {
+      // ...
+    }
+  }
+  ```
+
+  </details>
+
