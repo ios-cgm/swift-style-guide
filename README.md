@@ -1314,3 +1314,5 @@ class Pirate {
 ```
 
 </details>
+
+## 5. Patterns
