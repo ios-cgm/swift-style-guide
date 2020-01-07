@@ -4,8 +4,6 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 3.0 on August 8th, 2017.
-
 ## Table Of Contents
 
 - [Swift Style Guide](#swift-style-guide)
@@ -1317,7 +1315,7 @@ class Pirate {
 
 ## 5. Patterns
 
-* **5.1** Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property.
+* **5.1** Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals. A notable exception is UIViewController's `view` property.
 
   <details>
 
